@@ -10,6 +10,8 @@ def browser_configs():
     options = webdriver.ChromeOptions()
     options.add_argument('--start-maximized')
     browser.config.driver_options = options
+
     yield
+
     browser.quit()
 
