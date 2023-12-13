@@ -1,35 +1,32 @@
-from selene import browser, have, command
-import os
-import tests
+from selene import have
+from pages.registration_page import MidLevelStepsRegistrationPage
+from helpers import path
 
 
 def test_send_form(browser_configs):
-    browser.open("/automation-practice-form")
-    browser.element("#firstName").type("Ada")
-    browser.element("#lastName").type("Lovelace")
-    browser.element("#userEmail").type("lovelace@rumbler.ru")
-    browser.element("[name=gender][value=Female]+label").click()
-    browser.element("#userNumber").type("1112223344")
-    browser.element("#dateOfBirthInput").click()
-    browser.element('.react-datepicker__month-select').type('December')
-    browser.element('.react-datepicker__year-select').type('2000')
-    browser.element(f'.react-datepicker__day--0{22}').click()
-    browser.element("#subjectsInput").type("economics").press_enter()
-    browser.element("[for=hobbies-checkbox-2]").perform(command.js.scroll_into_view)
-    browser.all('.custom-checkbox').element_by(have.exact_text('Reading')).click()
-    browser.element("#uploadPicture").set_value(
-        os.path.abspath(
-            os.path.join(os.path.dirname(tests.__file__), "../resourses/flower.png")
-        )
-    )
-    browser.element("#currentAddress").type("Test street, 9-99")
-    browser.element('#state').click()
-    browser.all('[id^=react-select][id*=option]').element_by(have.exact_text('Uttar Pradesh')).click()
-    browser.element('#city').click()
-    browser.all('[id^=react-select][id*=option]').element_by(have.exact_text('Lucknow')).click()
-    browser.element("#submit").press_enter()
-    browser.element(".modal-header").should(have.text("Thanks for submitting the form"))
-    browser.element(".table").all("td:nth-of-type(even)").should(
+    reg_page = MidLevelStepsRegistrationPage()
+    reg_page.open('/automation-practice-form')
+    reg_page.fill_first_name('Ada')
+    reg_page.fill_last_name('Lovelace')
+    reg_page.fill_email('lovelace@rumbler.ru')
+    reg_page.choose_gender()
+    reg_page.fill_phone_number('1112223344')
+    reg_page.click_birthday()
+    reg_page.choose_bd_month('December')
+    reg_page.choose_bd_year('2000')
+    reg_page.choose_bd_day(22)
+    reg_page.choose_subject('economics')
+    reg_page.scroll_hobbies_into_view()
+    reg_page.choose_hobby('Reading')
+    reg_page.upload_pic(path.to_avatar('flower.png'))
+    reg_page.fill_address('Test street, 9-99')
+    reg_page.click_state()
+    reg_page.choose_state_city('Uttar Pradesh')
+    reg_page.click_city()
+    reg_page.choose_state_city('Lucknow')
+    reg_page.click_submit_bt()
+    reg_page.check_header('Thanks for submitting the form')
+    reg_page.fields_with_user_info().should(
         have.texts(
             "Ada Lovelace",
             "lovelace@rumbler.ru",
@@ -43,4 +40,6 @@ def test_send_form(browser_configs):
             "Uttar Pradesh Lucknow",
         )
     )
-    browser.element("#closeLargeModal").press_enter()
+    reg_page.close_form()
+
+
