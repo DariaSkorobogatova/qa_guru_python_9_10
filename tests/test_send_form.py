@@ -28,7 +28,7 @@ def test_send_form():
             )
         )
         browser.element("#currentAddress").type("Test street, 9-99")
-        time.sleep(3)
+        browser.element('#state').perform(command.js.scroll_into_view)
         browser.element('#state').click()
         browser.all('[id^=react-select][id*=option]').element_by(have.exact_text('Uttar Pradesh')).click()
         browser.element('#city').click()
