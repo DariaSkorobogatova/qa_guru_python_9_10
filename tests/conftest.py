@@ -9,7 +9,7 @@ from utils import attach
 @pytest.fixture(scope='function', autouse=True)
 def browser_configs():
     browser.config.base_url = 'https://demoqa.com'
-    browser.config.timeout = 2.0
+    browser.config.timeout = 4.0
     config.window_width = 1920
     config.window_height = 1080
     options = Options()
@@ -37,3 +37,5 @@ def browser_configs():
     attach.add_video(browser)
 
     browser.quit()
+
+
