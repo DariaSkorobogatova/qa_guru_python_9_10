@@ -4,7 +4,7 @@ import os
 import tests
 
 
-def test_send_form(browser_configs):
+def test_send_form():
     with allure.step("Open registrations form"):
         browser.open("/automation-practice-form")
 
