@@ -1,4 +1,3 @@
-import time
 from selene import browser, have, command
 import allure
 import os
@@ -8,6 +7,8 @@ import tests
 def test_send_form():
     with allure.step("Open registrations form"):
         browser.open("/automation-practice-form")
+        browser.driver.execute_script("$('footer').remove()")
+        browser.driver.execute_script("$('#fixedban').remove()")
 
     with allure.step("Fill form"):
         browser.element("#firstName").type("Ada")
