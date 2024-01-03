@@ -15,11 +15,11 @@ class User:
     hobby: str
     avatar: str
     current_address: str
-    user_state: str
-    user_city: str
+    state: str
+    city: str
 
 
-test_user = User(
+user = User(
     first_name='Ada',
     last_name='Lovelace',
     email="lovelace@rumbler.ru",
@@ -32,8 +32,9 @@ test_user = User(
     hobby="Reading",
     avatar="flower.png",
     current_address='Test street, 9-99',
-    user_state='Uttar Pradesh',
-    user_city='Lucknow',
+    state='Uttar Pradesh',
+    city='Lucknow',
 )
+
 
 
