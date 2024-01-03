@@ -7,6 +7,7 @@ def test_send_form(browser_configs):
     reg_page = HighLevelStepsRegistrationPage()
     with allure.step("Open registrations form"):
         reg_page.open('/automation-practice-form')
+        reg_page.hide_ad()
     with allure.step("Fill form"):
         reg_page.register(user)
     with allure.step("Check form results"):
